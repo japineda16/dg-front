@@ -1,0 +1,213 @@
+<div *ngIf="restaurant">
+
+  <div [class.h-18]="restaurant.address"
+       [class.h-16]="!restaurant.address"
+       [class.z-10]="!createCategory"
+       [ngClass]="{'z-10': !createProduct && !modalProduct}"
+       class="realtive sticky top-0 w-full rounded-b-3xl bg-center cursor-pointer object-cover shadow-lg flex items-center justify-center"
+       style="background-image:url('https://images.unsplash.com/photo-1622180203374-9524a54b734d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80')">
+    <div class="px-3 rounded-lg flex flex-col w-full">
+      <h4 class="text-white text-xl font-semibold  leading-tight truncate">{{restaurant.name}}
+      </h4>
+      <div class="flex justify-between items-center ">
+        <div class="flex flex-col">
+          <h2 class="text-sm flex items-center text-gray-100 font-normal" *ngIf="restaurant.address != undefined">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+              </path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            {{restaurant.address}}
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-3 space-y-2">
+    <div class="p-3 grid grid-cols-2 gap-4">
+      <button (click)="onChangeProduct()" class="bg-blue-500 w-full hover:bg-blue-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">
+        Anadir nuevo producto
+      </button>
+      <button (click)="onChangeCategory()" class="bg-yellow-400 w-full hover:bg-yellow-600 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">
+        Crear categoria
+      </button>
+    </div>
+  </div>
+
+  <div class="p-3 space-t-4 z-0">
+    <h4 class="font-semibold mt-4">Productos</h4>
+    <div class="overflow-x-scroll flex items-stretch flex space-x-4">
+      <div class="relative justify-between bg-white shadow-md rounded-3xl bg-cover w-64 h-64 text-gray-800
+      object-cover object-center rounded-lg shadow-md my-2"
+           *ngFor="let product of restaurant.menu"
+           (click)="onOpenModalProduct(product.title, product.price + ' ' + product.currency, product.description, product.image)"
+           style="background-image: url('http://localhost:1337/uploads/images/menu/{{product.image}} ')">
+        <div class="absolute bg-gray-700 opacity-50 rounded-3xl inset-0 z-0"></div>
+        <div class="relative flex flex-row items-end  h-64 w-full" style="width: 50vw !important;">
+          <div class="mb-5 p-6 rounded-lg  flex flex-col w-full">
+            <h4 class="mt-1 text-white text-xl font-semibold  leading-tight truncate">{{product.name}}
+            </h4>
+            <div class="flex justify-between items-center ">
+              <div class="flex flex-col">
+                <h2 class="text-sm flex items-center text-gray-300 font-normal">
+                  {{product.price}}
+                </h2>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4 class="font-semibold"><!-- Suggested By --></h4>
+    <div class="grid grid-cols-1" style="margin-bottom: 3.5rem !important;">
+      <div *ngFor="let category of categories">
+        <div class="flex mt-6 bg-white shadow-md rounded-2xl p-2">
+          <img src="https://images.unsplash.com/photo-1439130490301-25e322d88054?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80"
+               alt="Just a flower" class=" w-16  object-cover  h-16 rounded-xl">
+          <div class="flex flex-col justify-center w-full px-2 py-1">
+            <div class="flex justify-between items-center ">
+              <div class="flex flex-col">
+                <h2 class="text-sm font-medium">{{category.name}}</h2>
+              </div>
+              <a routerlink="/category/{{category.id}}">
+                <button type="button" class="text-white bg-yellow-400 hover:bg-yellow-500
+              focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5
+              py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">Editar</button>
+              </a>
+            </div>
+            <div class="flex pt-2  text-sm text-gray-400">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-create-rest [modalState]="createProduct" (submit)="onProductSubmit()" (close)="onChangeProduct()" title="">
+    <div class="sm:max-w-lg w-full px-10 pb-10 bg-white rounded-xl z-10">
+      <div class="text-center">
+        <h2 class="mt-1 text-2xl font-bold text-gray-900">
+          Anadir nuevo producto
+        </h2>
+        <p class="mt-2 text-sm text-gray-400">Rellena el formulario para crear un nuevo producto!</p>
+      </div>
+      <form class="mt-2 space-y-3" [formGroup]="formP">
+        <div class="grid grid-cols-1 space-y-2">
+          <label class="text-sm font-bold text-gray-500 tracking-wide">Nombre del producto</label>
+          <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                 type="text" formControlName="name" placeholder="Titulo del producto">
+        </div>
+        <div class="grid grid-cols-1 space-y-2">
+          <label class="text-sm font-bold text-gray-500 tracking-wide">Precio</label>
+          <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="number"
+                 formControlName="price" placeholder="Ej: 10">
+        </div>
+        <div class="grid grid-cols-1 space-y-2">
+          <label class="text-sm font-bold text-gray-500 tracking-wide">Moneda</label>
+          <div>
+            <div class="xl:w-96">
+              <select formControlName="currency" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
+            bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700
+            focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                <option selected disabled>Selecciona una moneda</option>
+                <option value="Bs">Bolivares</option>
+                <option value="USD">Dolares</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 space-y-2">
+          <label class="text-sm font-bold text-gray-500 tracking-wide">Categoria</label>
+          <div>
+            <div class="xl:w-96">
+              <select formControlName="category" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
+            bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700
+            focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                <option selected disabled>Selecciona una de tus categorias</option>
+                <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 space-y-2">
+          <label class="text-sm font-bold text-gray-500 tracking-wide">Descripcion</label>
+          <textarea class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" formControlName="description" placeholder="Descripcion del producto"></textarea>
+        </div>
+        <div class="grid grid-cols-1 space-y-2">
+          <label class="text-sm font-bold text-gray-500 tracking-wide">Adjuntar foto</label>
+          <div class="flex items-center justify-center w-full">
+            <label class="flex flex-col rounded-lg border-4 border-dashed w-full h-30 p-10 group text-center">
+              <input (change)="onFileChange($event)" formControlName="image" type="file" class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+            </label>
+          </div>
+        </div>
+        <!-- <div class="grid grid-cols-1 space-y-2">
+          <div class="form-check">
+            <input type="hidden" formControlName="restaurant">
+            <input formControlName="featured" class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label inline-block text-gray-800" for="flexCheckDefault">
+              Destacar producto
+            </label>
+          </div>
+        </div> -->
+        <div>
+          <button type="submit"
+                  class="my-5 w-full flex justify-center bg-blue-500 text-gray-100 p-4
+                rounded-full tracking-wide font-semibold  focus:outline-none focus:shadow-outline
+                hover:bg-blue-600 shadow-lg transition ease-in duration-300"
+                  [disabled]="loading" [ngClass]="{'opacity-50': loading, 'cursor-not-allowed': loading}">
+            <span *ngIf="!loading">Crear</span>
+            <span *ngIf="loading">Cargando...</span>
+          </button>
+        </div>
+      </form>
+    </div> -->
+  </app-create-rest>
+
+  <app-create-rest [modalState]="createCategory" (close)="onChangeCategory()" (submit)="onSubmitCategory()">
+    <div class="sm:max-w-lg w-full px-10 pb-10 bg-white rounded-xl z-10">
+      <div class="text-center">
+        <h2 class="mt-1 text-2xl font-bold text-gray-900">
+          Crear nuevo establecimiento!
+        </h2>
+        <p class="mt-2 text-sm text-gray-400">Crea una nueva categoria para tu local!</p>
+      </div>
+      <form class="mt-2 space-y-3" [formGroup]="formC">
+        <div class="grid grid-cols-1 space-y-2">
+          <label class="text-sm font-bold text-gray-500 tracking-wide">Nombre de la categoria</label>
+          <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" formControlName="name" placeholder="Nombre del establecimiento.">
+        </div>
+        <div>
+          <button type="submit"
+                  class="my-5 w-full flex justify-center bg-blue-500 text-gray-100 p-4
+                rounded-full tracking-wide font-semibold  focus:outline-none focus:shadow-outline
+                hover:bg-blue-600 shadow-lg transition ease-in duration-300"
+                  [disabled]="loading" [ngClass]="{'opacity-50': loading, 'cursor-not-allowed': loading}">
+            <span *ngIf="!loading">Crear</span>
+            <span *ngIf="loading">Cargando...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </app-create-rest>
+
+  <app-create-rest [modalState]="modalProduct" (close)="onCloseProductModal()">
+    <!--Body-->
+    <div class="sm:max-w-lg w-full px-10 pb-10 bg-white rounded-xl z-10">
+      <div class="text-center">
+        <img *ngIf="product.image != undefined" src="http://localhost:1337/uploads/images/menu/{{product.image}}">
+        <h2 class="mt-1 text-2xl font-bold text-gray-900">
+          {{product.title}}
+        </h2>
+        <p class="mt-2 text-sm text-gray-400">{{product.price}}</p>
+        <p class="mt-2 text-lg text-gray-500">{{product.description}}</p>
+      </div>
+    </div>
+  </app-create-rest>
+
+</div>

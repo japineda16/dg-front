@@ -5,8 +5,24 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => {
-      return import('./website/website.module').then((m) => {
+      return import('./modules/website/website.module').then((m) => {
         return m.WebsiteModule;
+      });
+    }
+  },
+  {
+    path: 'auth',
+    loadChildren: () => {
+      return import('./modules/auth/auth.module').then((m) => {
+        return m.AuthModule;
+      });
+    }
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => {
+      return import('./modules/restaurants/restaurants.module').then((m) => {
+        return m.RestaurantsModule;
       });
     }
   },

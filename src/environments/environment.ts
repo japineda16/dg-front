@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  endpoint: 'https://api-ferias.aplica.io/',
+  endpoint: 'http://localhost:1337/',
 };
 
 /*

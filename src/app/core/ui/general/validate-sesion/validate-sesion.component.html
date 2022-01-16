@@ -1,0 +1,30 @@
+<div [class.opacity-0]="!modalState" [class.pointer-events-none]="!modalState"
+     class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center">
+  <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+  <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+    <!-- Add margin if you want to see some of the overlay behind the modal-->
+    <div class="modal-content py-20 text-left px-8">
+      <!--Title-->
+      <div class="flex justify-between items-center pb-3">
+        <p class="text-2xl font-bold">Validando informacion...</p>
+      </div>
+
+      <!--Body-->
+      <p>Estamos validando la informacion ingresada, por favor espere un momento.</p>
+      <div class="flex items-center justify-center space-x-2 animate-bounce mt-8">
+        <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
+        <div class="w-8 h-8 bg-purple-500 rounded-full"></div>
+        <div class="w-8 h-8 bg-yellow-400 rounded-full"></div>
+      </div>
+
+      <!--Footer-->
+      <div class="flex justify-end pt-2">
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

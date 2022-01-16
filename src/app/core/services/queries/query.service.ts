@@ -14,11 +14,11 @@ export class QueryService {
     return this.http.get(environment.endpoint + url, headers);
   }
 
-  postQuery(url: string, body: JSON, headers: any): Observable<any> {
+  postQuery(url: string, body: any, headers?: any): Observable<any> {
     return this.http.post(environment.endpoint + url, body, headers);
   }
 
-  putQuery(url: string, body: JSON, headers: any): Observable<any> {
+  putQuery(url: string, body: JSON, headers?: any): Observable<any> {
     return this.http.put(environment.endpoint + url, body, headers);
   }
 

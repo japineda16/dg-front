@@ -18,15 +18,16 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
-    "autoprefixer": "^10.3.1",
-    "postcss": "^8.3.6",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.1",
-    "@angular/cli": "~12.2.1",
+    "@angular-devkit/build-angular": "^12.2.13",
+    "@angular/cli": "^12.2.14",
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
@@ -36,7 +37,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "tailwindcss": "^2.2.7",
+    "tailwindcss": "^2.2.19",
     "typescript": "~4.3.5"
   }
 }

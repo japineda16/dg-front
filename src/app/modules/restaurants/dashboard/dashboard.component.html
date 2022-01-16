@@ -1,0 +1,85 @@
+<div class="container mb-20">
+  <div class="grid grid-cols-3 gap-4 mt-6">
+    <!-- Items -->
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+      <img class="w-full" src="https://image.flaticon.com/icons/png/512/1250/1250151.png" alt="Sunset in the mountains">
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">Anadir nuevo restaurant</div>
+      </div>
+      <div class="flex px-6 pt-4 pb-2">
+        <div class="mx-auto">
+          <button (click)="openCreateRest()" type="button" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+            Crear
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let restaurant of restaurants" class="max-w-sm rounded overflow-hidden shadow-lg">
+      <img class="w-full" src="http://localhost:1337/uploads/images/restaurants/logo/{{restaurant.image}}" alt="Sunset in the mountains">
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">{{restaurant.name}}</div>
+      </div>
+      <div class="flex px-6 pt-4 pb-2">
+        <div class="mx-auto">
+          <button routerLink="restaurant/{{restaurant.id}}" type="button" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+            Ver
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-create-rest (close)="openCreateRest()" (submit)="onSubmitForm()" [modalState]="createRest" [title]="''">
+
+  <div class="sm:max-w-lg w-full px-10 pb-10 bg-white rounded-xl z-10">
+    <div class="text-center">
+      <h2 class="mt-1 text-2xl font-bold text-gray-900">
+        Crear nuevo establecimiento!
+      </h2>
+      <p class="mt-2 text-sm text-gray-400">Rellena el formulario para crear un nuevo local!</p>
+    </div>
+    <form class="mt-2 space-y-3" [formGroup]="form">
+      <div class="grid grid-cols-1 space-y-2">
+        <label class="text-sm font-bold text-gray-500 tracking-wide">Nombre del local</label>
+        <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" formControlName="name" placeholder="Nombre del establecimiento.">
+      </div>
+      <div class="grid grid-cols-1 space-y-2">
+        <label class="text-sm font-bold text-gray-500 tracking-wide">Direccion</label>
+        <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" formControlName="address" placeholder="Direccion del local.">
+      </div>
+      <div class="grid grid-cols-1 space-y-2">
+        <label class="text-sm font-bold text-gray-500 tracking-wide">Telefono</label>
+        <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="tel" formControlName="phone" placeholder="04XX-XXXXXXX">
+        <input type="hidden" formControlName="users">
+      </div>
+      <div class="grid grid-cols-1 space-y-2">
+        <label class="text-sm font-bold text-gray-500 tracking-wide">Descripcion</label>
+        <textarea class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" formControlName="description" placeholder="mail@gmail.com"></textarea>
+      </div>
+      <div class="grid grid-cols-1 space-y-2">
+        <label class="text-sm font-bold text-gray-500 tracking-wide">Adjuntar logo</label>
+        <div class="flex items-center justify-center w-full">
+          <label class="flex flex-col rounded-lg border-4 border-dashed w-full h-30 p-10 group text-center">
+            <input (change)="onFileChange($event)" formControlName="image" type="file" class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+          </label>
+        </div>
+      </div>
+      <p class="text-sm text-gray-300">
+        <span>Solo imagenes PNG</span>
+      </p>
+      <div>
+        <button type="submit"
+                class="my-5 w-full flex justify-center bg-blue-500 text-gray-100 p-4
+                rounded-full tracking-wide font-semibold  focus:outline-none focus:shadow-outline
+                hover:bg-blue-600 shadow-lg transition ease-in duration-300"
+                [disabled]="loading" [ngClass]="{'opacity-50': loading, 'cursor-not-allowed': loading}">
+          <span *ngIf="!loading">Crear</span>
+          <span *ngIf="loading">Cargando...</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+</app-create-rest>

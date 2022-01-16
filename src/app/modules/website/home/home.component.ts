@@ -12,22 +12,33 @@ import {data} from "autoprefixer";
 export class HomeComponent implements OnInit {
 
   data: any;
+  product: any;
+  modalState: boolean = false;
 
   constructor(private query: QueryService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(data => {
-      this.getRestaurants(data.fair);
+      this.getRestaurants(data.restaurant);
     });
+    this.product = {title: '', price: '', description: ''};
   }
 
   getRestaurants(resId: string): void {
-    this.query.getQuery('fair/' + resId).subscribe(res => {
+    this.query.getQuery('restaurants/' + resId).subscribe(res => {
       this.data = res;
-      console.log(this.data);
     }, error => {
       console.log(error);
     });
+  }
+
+  onOpenModal(title: any, image: any, price: any, description: any): void {
+    this.product = {title, image, price, description};
+    this.modalState = true;
+  }
+
+  onCloseModal(): void {
+    this.modalState = false;
   }
 
 }

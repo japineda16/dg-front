@@ -1,0 +1,29 @@
+<app-top-navbar [data]="data" [z10]="z10"></app-top-navbar>
+
+<div class="p-3 space-y-4 z-0">
+
+  <h3 class="text-2xl font-semibold" *ngIf="categories != undefined">{{categories.name}}</h3>
+
+  <div *ngIf="categories != undefined" class="grid grid-cols-1">
+    <div *ngFor="let menu of categories.menu">
+      <div [class.mt-6]="menu.id !== categories.menu[0].id" class="flex bg-white shadow-md rounded-2xl p-2">
+        <img src="http://localhost:1337/uploads/images/menu/{{menu.image}}"
+             alt="Just a flower" class=" w-16  object-cover  h-16 rounded-xl">
+        <div class="flex flex-col justify-center w-full px-2 py-1">
+          <div class="flex justify-between items-center ">
+            <div class="flex flex-col">
+              <h2 class="text-sm font-medium">{{menu.name}}</h2>
+            </div>
+            <button type="button" class="text-white bg-green-400 hover:bg-green-600
+              font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2" (click)="onOpenModal(menu.name, menu.price + ' ' + menu.currency, menu.description, menu.image)">Ver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<app-modal-product [modalState]="openModal"
+                   [title]="product.title" [description]="product.description"
+                   [price]="product.price" [image]="product.image" (close)="onCloseModal()"></app-modal-product>
