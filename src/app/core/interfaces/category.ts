@@ -2,5 +2,6 @@ export interface Category {
   id?: string,
   name: string,
   restaurant: any,
-  menu?: [];
+  menu?: [],
+  image?: string
 }

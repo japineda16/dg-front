@@ -26,16 +26,52 @@
 <div class="sm:max-w-lg w-full px-10 pb-10 bg-white rounded-xl z-10">
   <div class="text-center">
     <h2 class="mt-1 text-2xl font-bold text-gray-900">
-      Actualizar categoria!
+      Actualiza tu producto!
     </h2>
-    <p class="mt-2 text-sm text-gray-400">Edita y actualiza {{category.name}}!</p>
-    <img class="mx-auto h-64 w-64" *ngIf="category.image != ''" src="http://localhost:1337/uploads/images/menu/category/{{category.image}}">
+    <p class="mt-2 text-sm text-gray-400">Edita y actualiza {{product.name}}!</p>
+    <img class="mx-auto h-64 w-64" *ngIf="product.image != ''" src="http://localhost:1337/uploads/images/menu/{{product.image}}">
   </div>
   <form class="mt-2 space-y-3" [formGroup]="form" (submit)="onSubmitData()">
     <div class="grid grid-cols-1 space-y-2">
-      <label class="text-sm font-bold text-gray-500 tracking-wide">Nombre de la categoria</label>
+      <label class="text-sm font-bold text-gray-500 tracking-wide">Nombre del producto</label>
       <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
-             type="text" formControlName="name" placeholder="Nombre de la categoria.">
+             type="text" formControlName="name" placeholder="Nombre del prodcuto.">
+    </div>
+    <div class="grid grid-cols-1 space-y-2">
+      <label class="text-sm font-bold text-gray-500 tracking-wide">Precio</label>
+      <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+             type="text" formControlName="price" placeholder="Precio del producto.">
+    </div>
+    <div class="grid grid-cols-1 space-y-2">
+      <label class="text-sm font-bold text-gray-500 tracking-wide">Moneda</label>
+      <div>
+        <div class="xl:w-96">
+          <select formControlName="currency" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
+            bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700
+            focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+            <option selected disabled>Selecciona una moneda</option>
+            <option value="Bs">Bolivares</option>
+            <option value="USD">Dolares</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 space-y-2">
+      <label class="text-sm font-bold text-gray-500 tracking-wide">Categoria</label>
+      <div>
+        <div class="xl:w-96">
+          <select formControlName="category" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
+            bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700
+            focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+            <option *ngFor="let category of categories" value="{{ category.id }}" [disabled]="category.id === product.category.id">{{category.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 space-y-2">
+      <label class="text-sm font-bold text-gray-500 tracking-wide">Descripcion</label>
+      <textarea class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                formControlName="description" placeholder="Descripcion del producto."></textarea>
     </div>
     <div class="grid grid-cols-1 space-y-2">
       <label class="text-sm font-bold text-gray-500 tracking-wide">Adjuntar foto</label>

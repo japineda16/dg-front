@@ -8,6 +8,7 @@ import {RestModule} from "@ui/rest/rest.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { UpdateCategoryComponent } from './update-category/update-category.component';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UpdateCategoryComponent } from './update-category/update-category.compo
     RestaurantsComponent,
     DashboardComponent,
     RestaurantComponent,
-    UpdateCategoryComponent
+    UpdateCategoryComponent,
+    UpdateProductComponent
   ],
   imports: [
     CommonModule,

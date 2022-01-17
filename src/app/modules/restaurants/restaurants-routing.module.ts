@@ -4,6 +4,7 @@ import {RestaurantsComponent} from "./restaurants.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {RestaurantComponent} from "./restaurant/restaurant.component";
 import {UpdateCategoryComponent} from "./update-category/update-category.component";
+import {UpdateProductComponent} from "./update-product/update-product.component";
 
 const routes: Routes = [{
   path: '',
@@ -20,6 +21,10 @@ const routes: Routes = [{
     {
       path: 'category/:id',
       component: UpdateCategoryComponent
+    },
+    {
+      path: 'product/:id/:rest',
+      component: UpdateProductComponent
     }
   ]
 }];
