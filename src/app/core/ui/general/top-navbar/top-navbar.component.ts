@@ -9,20 +9,13 @@ import {Restaurant} from "@interfaces/restaurant";
 export class TopNavbarComponent implements OnInit {
 
   @Input() data: Restaurant;
+
   @Input() z10: boolean = true;
 
-  constructor() {
-    this.data = {
-      category: '',
-      description: '',
-      image: '',
-      name: '',
-      phone: '',
-      address: ''
-    }
-  }
+  constructor() { }
 
   ngOnInit(): void {
+    console.log(this.data.address);
   }
 
 }

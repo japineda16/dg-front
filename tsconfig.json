@@ -9,6 +9,8 @@
       "@services/*": ["src/app/core/services/*"],
       "@ui/*": ["src/app/core/ui/*"],
       "@interfaces/*": ["src/app/core/interfaces/*"],
+      "@validators/*": ["src/app/core/validators/*"],
+      "@interceptors/*": ["src/app/core/interceptors/*"],
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

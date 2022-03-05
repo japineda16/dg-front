@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { User } from "@interfaces/user"
 import {QueryService} from "@services/queries/query.service";
+import { UsernameValidator } from '@validators/username.validator';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,14 +37,15 @@ export class DashboardComponent implements OnInit {
       description: ['', Validators.required],
       image: [null, Validators.required],
       users: [this.user.id],
-      address: ['']
+      address: ['', Validators.required],
+      restaurantTag: ['', [Validators.required, UsernameValidator.cannotContainSpace]]
     });
   }
 
   onSubmitForm(): void {
     this.isLoading();
+    this.form.value.phone = '58' + this.form.value.phone;
     this.query.postQuery('restaurants', this.form.value).subscribe(res => {
-      console.log(res);
       this.onUploadLogo(res.id);
     }, error => {
       console.log(error);

@@ -85,12 +85,12 @@ export class RestaurantComponent implements OnInit {
 
   settingUpFormProduct(): void {
     this.formP = this.fb.group({
-      name: [''],
-      price: [''],
-      currency: [''],
-      category: [''],
-      description: [''],
-      image: [''],
+      name: ['', Validators.required],
+      price: ['', Validators.required],
+      currency: ['', Validators.required],
+      category: ['', Validators.required],
+      description: ['', Validators.required],
+      image: ['', Validators.required],
       featured: [false],
       restaurant: [this.params],
     });
@@ -103,6 +103,7 @@ export class RestaurantComponent implements OnInit {
       }, error => {
         console.log(error);
       });
+      this.isLoading();
     }
     if (!this.formP.valid) {
       console.log('no vas pal baile');

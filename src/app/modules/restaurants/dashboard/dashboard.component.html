@@ -43,26 +43,36 @@
     <form class="mt-2 space-y-3" [formGroup]="form">
       <div class="grid grid-cols-1 space-y-2">
         <label class="text-sm font-bold text-gray-500 tracking-wide">Nombre del local</label>
-        <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" formControlName="name" placeholder="Nombre del establecimiento.">
+        <input [class.border-red-500]="form.controls.name.touched && !form.controls.name.valid"
+        class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" formControlName="name" placeholder="Nombre del establecimiento.">
+      </div>
+      <div class="grid grid-cols-1 space-y-2">
+        <label class="text-sm font-bold text-gray-500 tracking-wide">LocalTag</label>
+        <input [class.border-red-500]="form.controls.restaurantTag.touched && !form.controls.restaurantTag.valid" 
+        class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" formControlName="restaurantTag" placeholder="Etiqueta del establecimiento a ser buscado.">
       </div>
       <div class="grid grid-cols-1 space-y-2">
         <label class="text-sm font-bold text-gray-500 tracking-wide">Direccion</label>
-        <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" formControlName="address" placeholder="Direccion del local.">
+        <input [class.border-red-500]="form.controls.address.touched && !form.controls.address.valid" 
+        class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" formControlName="address" placeholder="Direccion del local.">
       </div>
       <div class="grid grid-cols-1 space-y-2">
         <label class="text-sm font-bold text-gray-500 tracking-wide">Telefono</label>
-        <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="tel" formControlName="phone" placeholder="04XX-XXXXXXX">
+        <input [class.border-red-500]="form.controls.phone.touched && !form.controls.phone.valid" 
+        class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="number" formControlName="phone" placeholder="4XXXXXXXXX">
         <input type="hidden" formControlName="users">
       </div>
       <div class="grid grid-cols-1 space-y-2">
         <label class="text-sm font-bold text-gray-500 tracking-wide">Descripcion</label>
-        <textarea class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" formControlName="description" placeholder="mail@gmail.com"></textarea>
+        <textarea [class.border-red-500]="form.controls.description.touched && !form.controls.description.valid" 
+        class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" formControlName="description" placeholder="Ingresa una descripcion de tu producto."></textarea>
       </div>
       <div class="grid grid-cols-1 space-y-2">
         <label class="text-sm font-bold text-gray-500 tracking-wide">Adjuntar logo</label>
         <div class="flex items-center justify-center w-full">
           <label class="flex flex-col rounded-lg border-4 border-dashed w-full h-30 p-10 group text-center">
-            <input (change)="onFileChange($event)" formControlName="image" type="file" class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+            <input [class.border-red-500]="form.controls.image.touched && !form.controls.image.valid" 
+            (change)="onFileChange($event)" formControlName="image" type="file" class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
           </label>
         </div>
       </div>
@@ -74,7 +84,7 @@
                 class="my-5 w-full flex justify-center bg-blue-500 text-gray-100 p-4
                 rounded-full tracking-wide font-semibold  focus:outline-none focus:shadow-outline
                 hover:bg-blue-600 shadow-lg transition ease-in duration-300"
-                [disabled]="loading" [ngClass]="{'opacity-50': loading, 'cursor-not-allowed': loading}">
+                [disabled]="loading || !form.valid" [ngClass]="{'opacity-50': loading || !form.valid, 'cursor-not-allowed': loading || !form.valid}">
           <span *ngIf="!loading">Crear</span>
           <span *ngIf="loading">Cargando...</span>
         </button>

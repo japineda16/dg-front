@@ -7,7 +7,7 @@ export interface Restaurant {
   image: any
   menu?: any
   name: string
-  phone: string
+  phone: number
   updatedAt?: string
   users?: any,
   address?: string;

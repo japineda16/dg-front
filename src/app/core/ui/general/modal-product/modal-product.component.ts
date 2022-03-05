@@ -11,6 +11,7 @@ export class ModalProductComponent implements OnInit {
   @Input() title: string;
   @Input() price: string;
   @Input() description: string;
+  @Input() currency: string;
   @Input() image: string;
   @Output() close = new EventEmitter<boolean>();
 

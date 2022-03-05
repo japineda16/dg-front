@@ -33,7 +33,6 @@ export class ProductCategoryComponent implements OnInit {
 
   getCategory(): void {
     this.query.getQuery('categories/' + this.cat).subscribe(res => {
-      console.log(res);
       this.categories = res;
     }, error => {
       console.log(error);
@@ -41,8 +40,7 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   getRestaurants(): void {
-    this.query.getQuery('restaurants/' + this.rest).subscribe(res => {
-      console.log(res);
+    this.query.getQuery('resturantTag/' + this.rest).subscribe(res => {
       this.data = res;
     }, error => {
       console.log(error);

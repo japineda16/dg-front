@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ValidateSesionComponent } from './validate-sesion/validate-sesion.component';
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 import { ModalProductComponent } from './modal-product/modal-product.component';
+import { ContactWhatsappComponent } from './contact-whatsapp/contact-whatsapp.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -10,15 +12,18 @@ import { ModalProductComponent } from './modal-product/modal-product.component';
   declarations: [
     ValidateSesionComponent,
     TopNavbarComponent,
-    ModalProductComponent
+    ModalProductComponent,
+    ContactWhatsappComponent
   ],
   exports: [
     ValidateSesionComponent,
     TopNavbarComponent,
-    ModalProductComponent
+    ModalProductComponent,
+    ContactWhatsappComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class GeneralModule { }

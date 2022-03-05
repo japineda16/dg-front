@@ -1,6 +1,6 @@
 <div *ngIf="restaurant">
 
-  <div [class.h-18]="restaurant.address"
+  <div [class.h-20]="restaurant.address"
        [class.h-16]="!restaurant.address"
        [class.z-10]="!createCategory"
        [ngClass]="{'z-10': !createProduct && !modalProduct}"
@@ -9,18 +9,11 @@
     <div class="px-3 rounded-lg flex flex-col w-full">
       <h4 class="text-white text-xl font-semibold  leading-tight truncate">{{restaurant.name}}
       </h4>
-      <div class="flex justify-between items-center ">
+      <div class="flex justify-between items-center" [class.hidden]="!restaurant.address">
         <div class="flex flex-col">
-          <h2 class="text-sm flex items-center text-gray-100 font-normal" *ngIf="restaurant.address != undefined">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
-                 stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-              </path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            {{restaurant.address}}
+          <h2 class="text-sm flex items-center text-gray-100 font-normal">
+            <i class="fas fa-map-marker-alt"></i>
+            &nbsp; {{restaurant.address}}
           </h2>
         </div>
       </div>
@@ -106,19 +99,20 @@
       <form class="mt-2 space-y-3" [formGroup]="formP">
         <div class="grid grid-cols-1 space-y-2">
           <label class="text-sm font-bold text-gray-500 tracking-wide">Nombre del producto</label>
-          <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+          <input [class.border-red-500]="formP.controls.name.touched && !formP.controls.name.valid" class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                  type="text" formControlName="name" placeholder="Titulo del producto">
         </div>
         <div class="grid grid-cols-1 space-y-2">
           <label class="text-sm font-bold text-gray-500 tracking-wide">Precio</label>
-          <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="number"
+          <input [class.border-red-500]="formP.controls.price.touched && !formP.controls.price.valid" class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="number"
                  formControlName="price" placeholder="Ej: 10">
         </div>
         <div class="grid grid-cols-1 space-y-2">
           <label class="text-sm font-bold text-gray-500 tracking-wide">Moneda</label>
           <div>
             <div class="xl:w-96">
-              <select formControlName="currency" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
+              <select [class.border-red-500]="formP.controls.currency.touched && !formP.controls.currency.valid" formControlName="currency" 
+              class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
             bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700
             focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                 <option selected disabled>Selecciona una moneda</option>
@@ -132,7 +126,7 @@
           <label class="text-sm font-bold text-gray-500 tracking-wide">Categoria</label>
           <div>
             <div class="xl:w-96">
-              <select formControlName="category" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
+              <select [class.border-red-500]="formP.controls.category.touched && !formP.controls.category.valid" formControlName="category" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
             bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700
             focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                 <option selected disabled>Selecciona una de tus categorias</option>
@@ -143,13 +137,17 @@
         </div>
         <div class="grid grid-cols-1 space-y-2">
           <label class="text-sm font-bold text-gray-500 tracking-wide">Descripcion</label>
-          <textarea class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" formControlName="description" placeholder="Descripcion del producto"></textarea>
+          <textarea [class.border-red-500]="formP.controls.description.touched && !formP.controls.description.valid" 
+          class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" 
+          formControlName="description" placeholder="Descripcion del producto"></textarea>
         </div>
         <div class="grid grid-cols-1 space-y-2">
           <label class="text-sm font-bold text-gray-500 tracking-wide">Adjuntar foto</label>
           <div class="flex items-center justify-center w-full">
             <label class="flex flex-col rounded-lg border-4 border-dashed w-full h-30 p-10 group text-center">
-              <input (change)="onFileChange($event)" formControlName="image" type="file" class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+              <input [class.border-red-500]="formP.controls.image.touched && !formP.controls.image.valid" 
+              (change)="onFileChange($event)" formControlName="image" type="file" 
+              class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
             </label>
           </div>
         </div>
@@ -173,7 +171,7 @@
           </button>
         </div>
       </form>
-    </div> -->
+    </div>
   </app-create-rest>
 
   <app-create-rest [modalState]="createCategory" (close)="onChangeCategory()" (submit)="onSubmitCategory()">
@@ -187,7 +185,9 @@
       <form class="mt-2 space-y-3" [formGroup]="formC">
         <div class="grid grid-cols-1 space-y-2">
           <label class="text-sm font-bold text-gray-500 tracking-wide">Nombre de la categoria</label>
-          <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" formControlName="name" placeholder="Nombre del establecimiento.">
+          <input [class.border-red-500]="formC.controls.name.touched && !formC.controls.name.valid" 
+          class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" 
+          formControlName="name" placeholder="Nombre del establecimiento.">
         </div>
         <div>
           <button type="submit"

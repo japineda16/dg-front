@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  endpoint: 'https://api-ferias.aplica.io/',
+  endpoint: 'https://api-ferias.tusferias.come/',
 };

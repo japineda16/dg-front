@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {QueryService} from "@services/queries/query.service";
 import {ActivatedRoute} from "@angular/router";
 import {data} from "autoprefixer";
+import { Restaurant } from '@interfaces/restaurant';
 
 
 @Component({
@@ -11,9 +12,18 @@ import {data} from "autoprefixer";
 })
 export class HomeComponent implements OnInit {
 
-  data: any;
+  data: Restaurant = {
+    description: '',
+    image: undefined,
+    name: '',
+    phone: 0,
+    address: 'aaaa'
+  };
+  cart: any[] = [];
   product: any;
   modalState: boolean = false;
+  ids: any[];
+  modalWhatsAppState: boolean = false;
 
   constructor(private query: QueryService, private route: ActivatedRoute) { }
 
@@ -25,20 +35,44 @@ export class HomeComponent implements OnInit {
   }
 
   getRestaurants(resId: string): void {
-    this.query.getQuery('restaurants/' + resId).subscribe(res => {
+    this.query.getQuery('resturantTag/' + resId).subscribe(res => {
       this.data = res;
     }, error => {
       console.log(error);
     });
   }
 
-  onOpenModal(title: any, image: any, price: any, description: any): void {
-    this.product = {title, image, price, description};
+  onOpenModal(title: any, image: any, price: any, description: any, currency: any): void {
+    this.product = {title, image, price, description, currency};
     this.modalState = true;
+  }
+
+  onOpenWhatsAppModal(): void {
+    this.modalWhatsAppState = true;
+  }
+
+  onCloseWhatsAppModal(): void {
+    this.modalWhatsAppState = false;
   }
 
   onCloseModal(): void {
     this.modalState = false;
+  }
+
+  onAddToCart(event: any): void {
+    this.cart.push(event);
+    let ids = this.cart.map(o => o.id);
+    this.ids = ids;
+    this.cart = this.cart.filter(({id}, index) => !ids.includes(id, index + 1));
+  }
+
+  onDeleteFromCart(menu: any): void {
+    let index = this.cart.findIndex(obj => {
+      return obj.id == menu.id;
+    });
+    this.cart.splice(index, 1);
+    let indexId = this.ids.indexOf(menu.id);
+    this.ids.splice(indexId, 1);
   }
 
 }
