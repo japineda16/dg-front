@@ -38,7 +38,7 @@
       object-cover object-center rounded-lg shadow-md my-2"
            *ngFor="let product of restaurant.menu"
            (click)="onOpenModalProduct(product.title, product.price + ' ' + product.currency, product.description, product.image)"
-           style="background-image: url('{{env.endpoint}}uploads/images/menu/{{product.image}} ')">
+           style="background-image: url('https://api-ferias.tusferias.com/uploads/images/menu/{{product.image}} ')">
         <div class="absolute bg-gray-700 opacity-50 rounded-3xl inset-0 z-0"></div>
         <div class="relative flex flex-row items-end  h-64 w-full" style="width: 50vw !important;">
           <div class="p-6 rounded-lg  flex flex-col w-full">
@@ -67,7 +67,7 @@
     <div class="grid grid-cols-1" style="margin-bottom: 3.5rem !important;">
       <div *ngFor="let category of categories">
         <div class="flex mt-6 bg-white shadow-md rounded-2xl p-2">
-          <img *ngIf="category.image != ''" src="{{env.endpoint}}uploads/images/menu/category/{{category.image}}"
+          <img *ngIf="category.image != ''" src="https://api-ferias.tusferias.com/uploads/images/menu/category/{{category.image}}"
                alt="Just a flower" class=" w-16  object-cover  h-16 rounded-xl">
           <div class="flex flex-col justify-center w-full px-2 py-1">
             <div class="flex justify-between items-center ">
@@ -207,7 +207,7 @@
     <!--Body-->
     <div class="sm:max-w-lg w-full px-10 pb-10 bg-white rounded-xl z-10">
       <div class="text-center">
-        <img *ngIf="product.image != undefined" src="{{env.endpoint}}uploads/images/menu/{{product.image}}">
+        <img *ngIf="product.image != undefined" src="https://api-ferias.tusferias.com/uploads/images/menu/{{product.image}}">
         <h2 class="mt-1 text-2xl font-bold text-gray-900">
           {{product.title}}
         </h2>

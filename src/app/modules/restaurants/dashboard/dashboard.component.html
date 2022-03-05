@@ -16,7 +16,7 @@
     </div>
 
     <div *ngFor="let restaurant of restaurants" class="max-w-sm rounded overflow-hidden shadow-lg">
-      <img class="w-full" src="{{env.endpoint}}uploads/images/restaurants/logo/{{restaurant.image}}" alt="Sunset in the mountains">
+      <img class="w-full" src="https://api-ferias.tusferias.com/uploads/images/restaurants/logo/{{restaurant.image}}" alt="Sunset in the mountains">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">{{restaurant.name}}</div>
       </div>

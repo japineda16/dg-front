@@ -3,7 +3,6 @@ import {ActivatedRoute} from "@angular/router";
 import {QueryService} from "@services/queries/query.service";
 import {Restaurant} from "@interfaces/restaurant";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-category',
@@ -18,7 +17,6 @@ export class UpdateCategoryComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
   imgSrc: any;
-  env = environment;
 
   constructor(private actRoute: ActivatedRoute, private query: QueryService, private fb: FormBuilder) {
     this.actRoute.params.subscribe(res => this.catId = res.id);

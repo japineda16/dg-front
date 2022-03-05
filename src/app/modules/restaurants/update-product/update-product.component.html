@@ -29,7 +29,7 @@
       Actualiza tu producto!
     </h2>
     <p class="mt-2 text-sm text-gray-400">Edita y actualiza {{product.name}}!</p>
-    <img class="mx-auto h-64 w-64" *ngIf="product.image != ''" src="{{env.endpoint}}uploads/images/menu/{{product.image}}">
+    <img class="mx-auto h-64 w-64" *ngIf="product.image != ''" src="https://api-ferias.tusferias.com/uploads/images/menu/{{product.image}}">
   </div>
   <form class="mt-2 space-y-3" [formGroup]="form" (submit)="onSubmitData()">
     <div class="grid grid-cols-1 space-y-2">
