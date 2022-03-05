@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
   settingUpForm(): void {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      phone: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(9)]],
       description: ['', Validators.required],
       image: [null, Validators.required],
       users: [this.user.id],
