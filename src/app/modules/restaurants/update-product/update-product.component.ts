@@ -3,6 +3,7 @@ import {Restaurant} from "@interfaces/restaurant";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {QueryService} from "@services/queries/query.service";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-product',
@@ -19,6 +20,7 @@ export class UpdateProductComponent implements OnInit {
   imgSrc: any;
   restId: string;
   categories: any;
+  env = environment;
 
   constructor(private actRoute: ActivatedRoute, private query: QueryService, private fb: FormBuilder) {
     this.actRoute.params.subscribe(res => {

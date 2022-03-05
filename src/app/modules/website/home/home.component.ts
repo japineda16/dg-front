@@ -3,6 +3,7 @@ import {QueryService} from "@services/queries/query.service";
 import {ActivatedRoute} from "@angular/router";
 import {data} from "autoprefixer";
 import { Restaurant } from '@interfaces/restaurant';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -17,8 +18,9 @@ export class HomeComponent implements OnInit {
     image: undefined,
     name: '',
     phone: 0,
-    address: 'aaaa'
+    address: ' '
   };
+  env = environment;
   cart: any[] = [];
   product: any;
   modalState: boolean = false;

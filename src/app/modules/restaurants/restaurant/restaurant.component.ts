@@ -4,6 +4,7 @@ import {QueryService} from "@services/queries/query.service";
 import {Restaurant} from "@interfaces/restaurant";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Category} from '@interfaces/category'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-restaurant',
@@ -23,6 +24,7 @@ export class RestaurantComponent implements OnInit {
   imgSrc: any;
   product: any;
   modalProduct = false;
+  env = environment;
 
   constructor(private fb: FormBuilder, private router: ActivatedRoute, private query: QueryService) {
     this.params = this.router.snapshot.paramMap.get('id');

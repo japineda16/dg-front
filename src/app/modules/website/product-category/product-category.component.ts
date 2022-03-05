@@ -17,6 +17,7 @@ export class ProductCategoryComponent implements OnInit {
   product: any;
   openModal = false;
   z10 = true;
+  env = environment;
 
   constructor(private actRoute: ActivatedRoute, private query: QueryService) {
     this.actRoute.params.subscribe(res => {

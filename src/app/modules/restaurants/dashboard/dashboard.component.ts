@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { User } from "@interfaces/user"
 import {QueryService} from "@services/queries/query.service";
 import { UsernameValidator } from '@validators/username.validator';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,7 @@ export class DashboardComponent implements OnInit {
   user: User | any;
   restaurants: any;
   loading: boolean = false;
+  env = environment;
 
   constructor(private fb: FormBuilder, private query: QueryService) { }
 

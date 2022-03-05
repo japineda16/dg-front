@@ -18,7 +18,7 @@
   <div class="grid grid-cols-1">
     <div *ngFor="let menu of data.menu; let index=index">
       <div [class.mt-6]="menu.id !== data.menu[0].id" [class.mb-24]="menu.id === data.menu[data.menu.length - 1].id" class="flex bg-white shadow-md rounded-2xl p-2">
-        <img src="http://localhost:1337/uploads/images/menu/{{menu.image}}"
+        <img src="{{env.endpoint}}uploads/images/menu/{{menu.image}}"
              *ngIf="menu.image != ''" class="w-16 object-cover h-16 rounded-xl">
         <div class="flex flex-col justify-center w-full px-2 py-1">
           <div class="flex justify-between items-center ">
