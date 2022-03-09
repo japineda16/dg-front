@@ -15,11 +15,11 @@ const routes: Routes = [
       },
       {
         component: HomeComponent,
-        path: 'fair/restaurant/:restaurant'
+        path: 'local/:restaurant'
       },
       {
         component: ProductCategoryComponent,
-        path: 'fair/restaurant/:restaurant/category/:category'
+        path: 'local/:restaurant/categoria/:category'
       }
     ]
   }

@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
   onSubmitForm(): void {
     this.isLoading();
     this.form.value.phone = '58' + this.form.value.phone;
+    this.form.value.restaurantTag = this.form.value.restaurantTag.toLowerCase();
     this.query.postQuery('restaurants', this.form.value).subscribe(res => {
       this.onUploadLogo(res.id);
     }, error => {

@@ -4,6 +4,8 @@ import {QueryService} from "@services/queries/query.service";
 import {Restaurant} from "@interfaces/restaurant";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Category} from '@interfaces/category'
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-restaurant',
@@ -23,10 +25,19 @@ export class RestaurantComponent implements OnInit {
   imgSrc: any;
   product: any;
   modalProduct = false;
+  modalShare = false;
+  elementType = NgxQrcodeElementTypes.URL;
+  errorConnection = NgxQrcodeErrorCorrectionLevels.HIGH;
+  qrUrl: any;
+  qrValue: any;
 
-  constructor(private fb: FormBuilder, private router: ActivatedRoute, private query: QueryService) {
-    this.params = this.router.snapshot.paramMap.get('id');
-    this.product = {title: '', price: '', description: ''};
+  constructor(
+    private fb: FormBuilder,
+    private router: ActivatedRoute,
+    private titleService: Title,
+    private query: QueryService) {
+      this.params = this.router.snapshot.paramMap.get('id');
+      this.product = {title: '', price: '', description: ''};
   }
 
   onOpenModalProduct(title: string, price: string, description: string, image: string): void {
@@ -44,11 +55,16 @@ export class RestaurantComponent implements OnInit {
     this.settingUpFormProduct();
   }
 
+  copyInputMessage(url: string){
+    navigator.clipboard.writeText(url).then().catch(e => console.error(e));
+  }
+
   getRestaurant(): void {
     this.query.getQuery('restaurants/' + this.params).subscribe(res => {
+      this.titleService.setTitle(res.name);
       this.categories = res.category;
       this.restaurant = res;
-      console.log(res);
+      this.qrUrl = 'https://tusferias.com/local/' + res.restaurantTag;
     }, error => {
       console.log(error);
     });
@@ -60,6 +76,10 @@ export class RestaurantComponent implements OnInit {
 
   onChangeProduct(): void {
     this.createProduct = !this.createProduct;
+  }
+
+  onShareLocal(): void {
+    this.modalShare = !this.modalShare;
   }
 
   settingUpFormCategory(): void {

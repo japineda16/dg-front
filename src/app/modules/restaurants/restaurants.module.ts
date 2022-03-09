@@ -9,6 +9,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { UpdateCategoryComponent } from './update-category/update-category.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { UpdateProductComponent } from './update-product/update-product.componen
     RestModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxQRCodeModule
   ],
 })
 export class RestaurantsModule { }
