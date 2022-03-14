@@ -6,7 +6,7 @@
 
   <div *ngIf="categories != undefined" class="grid grid-cols-1">
     <div *ngFor="let menu of categories.menu">
-      <div [class.mt-6]="menu.id !== categories.menu[0].id" class="flex bg-white shadow-md rounded-2xl p-2">
+      <div  *ngIf="menu.isActive === true" [class.mt-6]="menu.id !== categories.menu[0].id" class="flex bg-white shadow-md rounded-2xl p-2">
         <img src="https://api-ferias.tusferias.com/uploads/images/menu/{{menu.image}}"
              alt="Just a flower" class=" w-16  object-cover  h-16 rounded-xl">
         <div class="flex flex-col justify-center w-full px-2 py-1">

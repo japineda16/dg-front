@@ -64,7 +64,7 @@ export class RestaurantComponent implements OnInit {
       this.titleService.setTitle(res.name);
       this.categories = res.category;
       this.restaurant = res;
-      this.qrUrl = 'https://tusferias.com/local/' + res.restaurantTag;
+      this.qrUrl = 'https://katalogo.vip/local/' + res.restaurantTag;
     }, error => {
       console.log(error);
     });
