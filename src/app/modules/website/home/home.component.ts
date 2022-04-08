@@ -35,8 +35,8 @@ export class HomeComponent implements OnInit {
   }
 
   getRestaurants(resId: string): void {
-    this.query.getQuery('resturantTag/' + resId).subscribe(res => {
-      this.data = res;
+    this.query.postQuery('resturantTag/' + resId, null).subscribe(res => {
+      this.data = res[0];
     }, error => {
       console.log(error);
     });
