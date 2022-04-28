@@ -11,6 +11,7 @@ import {QueryService} from "@services/queries/query.service";
 export class ProductCategoryComponent implements OnInit {
 
   data: Restaurant;
+  isLoading = true;
   rest: string;
   cat: string;
   categories: any;
@@ -34,14 +35,20 @@ export class ProductCategoryComponent implements OnInit {
   getCategory(): void {
     this.query.getQuery('categories/' + this.cat).subscribe(res => {
       this.categories = res;
+      if (this.data != undefined) {
+        this.isLoading = false;
+      }
     }, error => {
       console.log(error);
     });
   }
 
   getRestaurants(): void {
-    this.query.getQuery('resturantTag/' + this.rest).subscribe(res => {
+    this.query.postQuery('resturantTag/' + this.rest, null).subscribe(res => {
       this.data = res;
+      if (this.categories != undefined) {
+        this.isLoading = false;
+      }
     }, error => {
       console.log(error);
     });

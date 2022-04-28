@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   modalState: boolean = false;
   ids: any[];
   modalWhatsAppState: boolean = false;
+  isLoading = true;
 
   constructor(private query: QueryService, private route: ActivatedRoute) { }
 
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
   getRestaurants(resId: string): void {
     this.query.postQuery('resturantTag/' + resId, null).subscribe(res => {
       this.data = res[0];
+      this.isLoading = false;
     }, error => {
       console.log(error);
     });

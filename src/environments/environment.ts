@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   endpoint: 'http://localhost:1337/',
+  // endpoint: 'https://api-ferias.tusferias.com/',
 };
 
 /*

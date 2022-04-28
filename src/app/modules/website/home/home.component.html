@@ -1,70 +1,85 @@
-<app-top-navbar [data]="data" [z10]="!modalState"></app-top-navbar>
+<div *ngIf="!isLoading">
 
-<!-- Content -->
-<div class="p-3 space-y-4 z-0" *ngIf="data !== undefined">
-  <h4 class="font-semibold mt-9">Categorias</h4>
-  <div class="overflow-x-scroll flex items-stretch flex space-x-4">
-    <div *ngFor="let category of data.category">
-      <div class="mt-2">
-        <div class="flex w-max">
-          <button routerLink="categoria/{{category.id}}" class="bg-gray-200 hover:bg-gray-300 py-2 px-4 rounded-full">
-            <!-- <i class="fas fa-shopping-cart"></i> --> {{category.name}}
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <h4 class="font-semibold">Catalogo</h4>
-  <div class="grid grid-cols-1">
-    <div *ngFor="let menu of data.menu; let index=index">
-      <div  *ngIf="menu.isActive === true" [class.mt-6]="menu.id !== data.menu[0].id" [class.mb-24]="menu.id === data.menu[data.menu.length - 1].id" class="flex bg-white shadow-md rounded-2xl p-2">
-        <img src="https://api-ferias.tusferias.com/uploads/images/menu/{{menu.image}}"
-             *ngIf="menu.image != ''" class="w-16 object-cover h-16 rounded-xl">
-        <div class="flex flex-col justify-center w-full px-2 py-1">
-          <div class="flex justify-between items-center ">
-            <div class="flex flex-col">
-              <h2 class="text-sm font-medium">{{menu.name}}</h2>
-            </div>
-            <div class="flex">
-              <button type="button" class="text-white bg-purple-700 hover:bg-purple-800
-              font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700"
-              (click)="onOpenModal(menu.title, menu.image, menu.price, menu.description, menu.currency)">Ver</button>
+  <app-top-navbar [data]="data" [z10]="!modalState"></app-top-navbar>
 
-              <button *ngIf="ids === undefined || !ids.includes(menu.id)" (click)="onAddToCart(menu)" class="ml-3 text-white bg-green-400 hover:bg-green-600
-              font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-green-600 dark:hover:bg-green-700">
-                <i class="fas fa-cart-plus"></i>
-              </button>
-              <button *ngIf="ids !== undefined && ids.includes(menu.id)" 
-              (click)="onDeleteFromCart(menu)" class="ml-3 text-white bg-green-400 hover:bg-green-600
-              font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-green-600 dark:hover:bg-green-700">
-                <i class="fas fa-check"></i>
-              </button>
-            </div>
+  <!-- Content -->
+  <div class="p-3 space-y-4 z-0" *ngIf="data !== undefined">
+    <h4 class="font-semibold mt-9">Categorias</h4>
+    <div class="overflow-x-scroll flex items-stretch flex space-x-4">
+      <div *ngFor="let category of data.category">
+        <div class="mt-2">
+          <div class="flex w-max">
+            <button routerLink="categoria/{{category.id}}" class="bg-gray-200 hover:bg-gray-300 py-2 px-4 rounded-full">
+              <!-- <i class="fas fa-shopping-cart"></i> --> {{category.name}}
+            </button>
           </div>
         </div>
       </div>
     </div>
+    <h4 class="font-semibold">Catalogo</h4>
+    <div class="grid grid-cols-2">
+      <div *ngFor="let menu of data.menu; let index=index" class="p-4 m-auto">
+        <div *ngIf="menu.isActive === true" [class.mt-6]="menu.id !== data.menu[0].id" [class.mb-24]="menu.id === data.menu[data.menu.length - 1].id"
+         class="bg-white rounded-lg shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+          <a (click)="onOpenModal(menu.title, menu.image, menu.price, menu.description, menu.currency)">
+              <img class="p-8 rounded-t-lg" src="https://api.katalogo.vip/uploads/images/menu/{{menu.image}}" alt="{{menu.name}}" />
+          </a>
+          <div class="px-5 pb-5">
+              <a (click)="onOpenModal(menu.title, menu.image, menu.price, menu.description, menu.currency)">
+                  <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                    {{menu.name}}
+                  </h5>
+              </a>
+              <!-- <div class="flex items-center mt-2.5 mb-5">
+                  <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                  <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                  <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                  <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                  <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                  <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
+              </div> -->
+              <div class="flex justify-between items-center">
+                  <span class="text-xl font-bold text-gray-900 dark:text-white">{{menu.price}} {{menu.currency}}</span>
+                  <a
+                  *ngIf="ids === undefined || !ids.includes(menu.id)" (click)="onAddToCart(menu)"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
+                  font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 
+                  dark:focus:ring-blue-800"><i class="fas fa-cart-plus"></i></a>
+                  <a
+                  *ngIf="ids !== undefined && ids.includes(menu.id)" (click)="onDeleteFromCart(menu)"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
+                  font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 
+                  dark:focus:ring-blue-800"><i class="fas fa-check"></i></a>
+              </div>
+          </div>
+      </div>
+      
+      </div>
+    </div>
+  
   </div>
-</div>
-<div class="fixed w-full bottom-0 p-5 h-16 rounded-t-xl px-6 flex items-center justify-between bg-gray-900 shadow-3xl text-gray-400 cursor-pointer">
-  <!-- 
-  <div class="flex flex-col items-center transition ease-in duration-200 hover:text-blue-400 ">
-    <i class="fas fa-search fa-lg"></i>
-  </div>
-  -->
-  <div class="flex flex-col items-center mx-auto hover:text-blue-400" (click)="onOpenWhatsAppModal()">
-    <div
-      class="absolute bottom-5 shadow-2xl text-center flex items-center justify-center rounded-full border-4 text-3xl border-gray-50 hover:border-blue-500 bg-blue-500 w-20 h-20 p-2 text-white transition ease-in duration-200 ">
-      <i class="fab fa-whatsapp"></i>
-      <span *ngIf="ids != undefined" class="animate-ping absolute inline-flex h-full w-full rounded-full border-4 opacity-50"></span>
+  <div class="fixed w-full bottom-0 p-5 h-16 rounded-t-xl px-6 flex items-center justify-between bg-gray-900 shadow-3xl text-gray-400 cursor-pointer">
+    <!-- 
+    <div class="flex flex-col items-center transition ease-in duration-200 hover:text-blue-400 ">
+      <i class="fas fa-search fa-lg"></i>
+    </div>
+    -->
+    <div class="flex flex-col items-center mx-auto hover:text-blue-400" (click)="onOpenWhatsAppModal()">
+      <div
+        class="absolute bottom-5 shadow-2xl text-center flex items-center justify-center rounded-full border-4 text-3xl border-gray-50 hover:border-blue-500 bg-blue-500 w-20 h-20 p-2 text-white transition ease-in duration-200 ">
+        <i class="fab fa-whatsapp"></i>
+        <span *ngIf="ids != undefined" class="animate-ping absolute inline-flex h-full w-full rounded-full border-4 opacity-50"></span>
+      </div>
     </div>
   </div>
-</div>
+  
+  <app-modal-product [image]="product.image"
+                     [price]="product.price"
+                     [description]="product.description"
+                     [title]="product.title"
+                     [currency]="product.currency"
+                     [modalState]="modalState" (close)="onCloseModal()"></app-modal-product>
+  <app-contact-whatsapp [modalState]="modalWhatsAppState" [phone]="data.phone" [data]="cart" (close)="onCloseWhatsAppModal()"></app-contact-whatsapp>
+  
 
-<app-modal-product [image]="product.image"
-                   [price]="product.price"
-                   [description]="product.description"
-                   [title]="product.title"
-                   [currency]="product.currency"
-                   [modalState]="modalState" (close)="onCloseModal()"></app-modal-product>
-<app-contact-whatsapp [modalState]="modalWhatsAppState" [phone]="data.phone" [data]="cart" (close)="onCloseWhatsAppModal()"></app-contact-whatsapp>
+</div>

@@ -14,8 +14,6 @@ export class TopNavbarComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.data.address);
-  }
+  ngOnInit(): void { }
 
 }

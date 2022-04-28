@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  endpoint: 'https://api-ferias.tusferias.com/',
+  endpoint: 'https://api.katalogo.vip/',
 };
