@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {QueryService} from "@services/queries/query.service";
 import {ActivatedRoute} from "@angular/router";
-import {data} from "autoprefixer";
 import { Restaurant } from '@interfaces/restaurant';
 
 
