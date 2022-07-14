@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {QueryService} from "@services/queries/query.service";
 import {ActivatedRoute} from "@angular/router";
 import { Restaurant } from '@interfaces/restaurant';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -25,7 +26,9 @@ export class HomeComponent implements OnInit {
   modalWhatsAppState: boolean = false;
   isLoading = true;
 
-  constructor(private query: QueryService, private route: ActivatedRoute) { }
+  constructor(private query: QueryService, private route: ActivatedRoute, private titleService:Title) {
+    this.titleService.setTitle('cargando...');
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(data => {
@@ -37,6 +40,7 @@ export class HomeComponent implements OnInit {
   getRestaurants(resId: string): void {
     this.query.postQuery('resturantTag/' + resId, null).subscribe(res => {
       this.data = res[0];
+      this.titleService.setTitle(this.data.name);
       this.isLoading = false;
     }, error => {
       console.log(error);

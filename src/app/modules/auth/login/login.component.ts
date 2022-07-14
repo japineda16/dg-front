@@ -17,19 +17,32 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  isLoading: boolean = false;
+  errMsg = '';
+  err = false;
+
   onSubmitForm(): void {
+    this.isLoading = true;
+    this.err = false;
+    this.errMsg = '';
     if (this.form.valid) {
       this.query.postQuery('auth/login', this.form.value).subscribe(res => {
         delete res.user.password;
+        this.isLoading = false;
         localStorage.setItem('user_token', res.token);
         localStorage.setItem('user', JSON.stringify(res.user));
         this.router.navigateByUrl('/dashboard');
       }, error => {
+        this.isLoading = false;
+        this.err = true;
+        this.errMsg = 'Ha habido un problema, por favor, intentelo de nuevo.';
         console.log(error);
       });
     }
     if (!this.form.valid) {
-      console.log('Formulario no valido');
+      this.err = true;
+      this.isLoading = false;
+      this.errMsg = 'Formulario no valido';
     }
   }
 

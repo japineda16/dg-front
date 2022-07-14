@@ -1,16 +1,16 @@
 <div *ngIf="data.address">
 
-  <div [class.h-20]="data.address" [class.h-16]="!data.address" [class.z-10]="z10" class="realtive sticky top-0 w-full
-  rounded-b-3xl bg-center cursor-pointer object-cover shadow-lg flex items-center justify-center"
-       style="background-image:url('https://images.unsplash.com/photo-1622180203374-9524a54b734d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80')">
+  <div [class.z-10]="z10" class="bg-gradient-to-r py-3 from-purple-300 to-indigo-200 realtive sticky top-0 w-full
+  rounded-b-3xl bg-center cursor-pointer object-cover shadow-lg flex items-center justify-center text-center">
   
     <div class="px-3 rounded-lg flex flex-col w-full">
       <div class="my-auto">
-        <h4 class="text-white text-xl font-semibold  leading-tight truncate">{{data.name}}
+        <img *ngIf="data.image != null || data.image != undefined" class="mx-auto w-1/3 rounded-full" src="https://api.katalogo.vip/uploads/images/restaurants/logo/{{data.image}}" alt="{{data.name}}" />
+        <h4 class="text-black text-xl font-semibold mt-3 leading-tight truncate">{{data.name}}
         </h4>
-        <div class="flex justify-between items-center">
-          <div class="flex flex-col">
-            <h2 class="text-sm flex items-center text-gray-100 font-normal" [class.hidden]="!data.address">
+        <div class="justify-between items-center">
+          <div>
+            <h2 class="text-sm items-center text-gray-500 font-normal" [class.hidden]="!data.address">
               <i class="fas fa-map-marker-alt"></i>
               &nbsp; {{data.address}}
             </h2>
