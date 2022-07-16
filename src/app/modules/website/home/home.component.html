@@ -79,7 +79,11 @@
                      [title]="product.title"
                      [currency]="product.currency"
                      [modalState]="modalState" (close)="onCloseModal()"></app-modal-product>
-  <app-contact-whatsapp [modalState]="modalWhatsAppState" [phone]="data.phone" [data]="cart" (close)="onCloseWhatsAppModal()"></app-contact-whatsapp>
+  <app-contact-whatsapp 
+  [modalState]="modalWhatsAppState" 
+  [business]="data"
+  [phone]="data.phone" [data]="cart" 
+  (close)="onCloseWhatsAppModal()"></app-contact-whatsapp>
   
 
 </div>

@@ -13,6 +13,7 @@ export class ContactWhatsappComponent implements OnInit {
   @Input() modalState: boolean;
   @Input() data: any;
   @Input() phone: number;
+  @Input() business: any;
   @Output() close = new EventEmitter<boolean>();
   public form: FormGroup;
 
@@ -28,10 +29,11 @@ export class ContactWhatsappComponent implements OnInit {
   }
 
   onSubmitWhatsApp(): void {
+    console.log(this.data);
     if (this.form.valid) {
       this.form.value.data = this.data;
       let link = 'https://api.whatsapp.com/send/?phone=' + this.phone + '&text=¡Hola! Mi nombre es ' + this.form.value.name
-      + ' vengo de %2ATusFerias.com%2A estoy interesado en contactarte... Me gustaria ordenar';
+      + ' vengo de %2Akatalogo.vip/local/' + this.business.restaurantTag + '%2A estoy interesado en contactarte... Me gustaria ordenar';
       if (this.form.value.data.length > 0) {
         let order = '';
         this.form.value.data.forEach((e: any) => {
