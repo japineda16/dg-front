@@ -9,7 +9,7 @@
       <div *ngFor="let category of data.category">
         <div class="mt-2">
           <div class="flex w-max">
-            <button routerLink="categoria/{{category.id}}" class="border-2 hover:bg-gray-300 py-2 px-4 rounded-full">
+            <button routerLink="categoria/{{category.id}}" class="border hover:bg-gray-300 py-2 px-4 rounded-full">
               <!-- <i class="fas fa-shopping-cart"></i> --> {{category.name}}
             </button>
           </div>
@@ -20,7 +20,7 @@
     <div class="grid grid-cols-1">
       <div *ngFor="let menu of data.menu; let index=index" class="p-4 mt-auto mb-auto">
         <div *ngIf="menu.isActive === true" [class.mb-24]="menu.id === data.menu[data.menu.length - 1].id"
-         class="bg-white rounded-lg shadow-xl bg-white p-5">
+         class="bg-white rounded-lg border bg-white p-5">
          <div class="grid grid-cols-3">
             <div class="col-span-2 my-auto">
               <a (click)="onOpenModal(menu.title, menu.image, menu.price, menu.description, menu.currency)" href="javascript:;">
@@ -28,7 +28,7 @@
                   {{menu.name}}
                 </h3>
                 <h3 class="text-lg tracking-tight text-gray-500 mt-1">
-                  {{menu.description}}
+                  {{ menu.description.length > 115 ? menu.description.substring(0, 115) + '...' : menu.description }}
                 </h3>
               </a>
 
@@ -62,7 +62,7 @@
     </div>
   
   </div>
-  <div class="fixed w-full bottom-0 p-5 h-16 rounded-t-xl px-6 flex items-center justify-between bg-gray-900 shadow-3xl text-gray-400 cursor-pointer">
+  <div class="fixed w-full bottom-0 p-5 h-16 rounded-t-xl px-6 flex items-center justify-between bg-gray-200 shadow-3xl text-gray-400 cursor-pointer">
     <!-- 
     <div class="flex flex-col items-center transition ease-in duration-200 hover:text-blue-400 ">
       <i class="fas fa-search fa-lg"></i>
@@ -70,9 +70,10 @@
     -->
     <div class="flex flex-col items-center mx-auto hover:text-blue-400" (click)="onOpenWhatsAppModal()">
       <div
-        class="absolute bottom-5 shadow-2xl text-center flex items-center justify-center rounded-full border-4 text-3xl border-gray-50 hover:border-blue-500 bg-blue-500 w-20 h-20 p-2 text-white transition ease-in duration-200 ">
-        <i class="fab fa-whatsapp"></i>
-        <span *ngIf="ids != undefined" class="animate-ping absolute inline-flex h-full w-full rounded-full border-4 opacity-50"></span>
+        class="absolute bottom-5 shadow-2xl text-center flex items-center justify-center rounded-full border-4 text-3xl hover:border-blue-900 
+        border-blue-500 bg-blue-500 w-20 h-20 p-2 text-white transition ease-in duration-200 ">
+        <i class="fas fa-shopping-basket"></i>
+        <span *ngIf="ids != undefined" class="animate-ping bg-blue-400 absolute inline-flex h-full w-full rounded-full border-4 opacity-500"></span>
       </div>
     </div>
   </div>
