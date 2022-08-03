@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading">
+<div *ngIf="!isLoading" class="bg-gray-100">
 
   <app-top-navbar [data]="data" [z10]="!modalState"></app-top-navbar>
 
@@ -9,7 +9,7 @@
       <div *ngFor="let category of data.category">
         <div class="mt-2">
           <div class="flex w-max">
-            <button routerLink="categoria/{{category.id}}" class="border hover:bg-gray-300 py-2 px-4 rounded-full">
+            <button routerLink="categoria/{{category.id}}" class="border bg-white hover:bg-slate-200 py-2 px-4 rounded-full">
               <!-- <i class="fas fa-shopping-cart"></i> --> {{category.name}}
             </button>
           </div>
@@ -62,7 +62,7 @@
     </div>
   
   </div>
-  <div class="fixed w-full bottom-0 p-5 h-16 rounded-t-xl px-6 flex items-center justify-between bg-gray-200 shadow-3xl text-gray-400 cursor-pointer">
+  <div class="fixed w-full bottom-0 p-5 h-16 rounded-t-xl px-6 flex items-center justify-between bg-white border shadow-3xl text-gray-400 cursor-pointer">
     <!-- 
     <div class="flex flex-col items-center transition ease-in duration-200 hover:text-blue-400 ">
       <i class="fas fa-search fa-lg"></i>
