@@ -89,6 +89,17 @@ export class RestaurantComponent implements OnInit {
     });
   }
 
+  onDeleteCategory(id: any): void {
+    this.isLoading();
+    this.query.deleteQuery('categories/' + id).subscribe(res => {
+      this.isLoading();
+      this.ngOnInit();
+    }, error => {
+      this.isLoading();
+      this.ngOnInit();
+    });
+  }
+
   onSubmitCategory(): void {
     if (this.formC.valid) {
       this.query.postQuery('categories', this.formC.value).subscribe(res => {
