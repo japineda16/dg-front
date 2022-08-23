@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     this.query.postQuery('resturantTag/' + resId, null).subscribe(res => {
       this.data = res[0];
       this.titleService.setTitle(this.data.name);
-      // this.isLoading = false;
+      this.isLoading = false;
     }, error => {
       console.log(error);
     });
